@@ -52,6 +52,7 @@ git clone https://github.com/piotrmaciejbednarski/useme-mcp-server.git
 - `browse_category_jobs(category_id, page, language = "en", num_pages)` - Browse jobs from specific categories (default ordering)
 - `get_job_details(job_url)` - Get detailed information about a specific job
 - `get_job_competition(job_url)` - Analyze competition for a specific job offer
+- `get_user_profile(profile_url)` - Get comprehensive user/competitor profile information
 - `calculate_useme_billing(payout_amount: float, currency: str = "PLN", copyright_transfer: str = "license", contractor_country: str = "PL", contractor_is_business: bool = False, contractor_is_vat_payer: bool = False, employer_country: str = "PL", employer_is_business: bool = True, employer_is_vat_payer: bool = True)` - Calculate billing costs and fees
 
 ### Job Filtering & Sorting
@@ -146,4 +147,30 @@ git clone https://github.com/piotrmaciejbednarski/useme-mcp-server.git
 - **Net payout to you:** 250.00 PLN
 
 This assumes standard settings (license transfer, individual freelancer, business client).
+```
+
+### User profile analysis
+
+```md
+**User:** Analyze this competitor's profile to understand their expertise and reputation.
+
+**Assistant:** Ran `get_user_profile(profile_url='https://useme.com/pl/roles/contractor/example-user,12345/')`
+
+**Assistant:** Here are the profile details:
+
+**Experience:** 3+ years on Useme (since March 2021) with 48 total deals
+- **Success rate:** 97.9% (47 successful, 1 failed)
+- **Client satisfaction:** 75% positive reviews (6 positive, 2 negative)
+
+**Specializations:**
+- **Primary:** Coding and IT > Software
+- **Secondary:** Other services > Other
+- **Key skills:** Python, AI/ML, API development, databases
+
+**Portfolio highlights:**
+- 10+ open-source projects with 600+ downloads
+- AI/ML focus with neural network projects
+- Security research (CVE discoveries)
+
+**Competitive positioning:** Strong technical expertise but occasional client communication issues based on reviews.
 ```
