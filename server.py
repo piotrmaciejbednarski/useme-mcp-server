@@ -7,7 +7,6 @@ This MCP server provides data fetching tools for freelancers to:
 - Get raw job data for LLM analysis
 """
 
-from pathlib import Path
 from fastmcp import FastMCP
 from typing import List, Optional, Dict, Any
 import logging
@@ -31,26 +30,17 @@ from useme_mcp.services.category_jobs import (
 from useme_mcp.services.billing_calculator import calculate_billing
 from useme_mcp.services.user_profile import fetch_user_profile
 
+# Get system instructions
+from config.instructions import SYSTEM_INSTRUCTION
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Get system instructions from file
-instructions = ""
-
-with open(
-    Path(__file__).parent / "data" / "instructions.md", "r", encoding="utf-8"
-) as f:
-    instructions = f.read()
-    if not instructions:
-        logger.warning("No instructions found.")
-    else:
-        logger.info("Instructions loaded successfully.")
-
 # Create the MCP server
 mcp = FastMCP(
     name="useme-job-assistant",
-    instructions=instructions,
+    instructions=SYSTEM_INSTRUCTION,
 )
 
 

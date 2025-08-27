@@ -1,3 +1,4 @@
+SYSTEM_INSTRUCTION = """
 This server provides data fetching tools for the Useme freelance platform to help freelancers find opportunities and create compelling proposals.
 
 Available tools:
@@ -27,3 +28,4 @@ Use these tools to help freelancers:
 4. **Strategic advice** - Recommend which jobs to pursue based on freelancer's skills, experience level, and career goals
 
 Always gather comprehensive job data first, then provide actionable insights, analysis, and concrete recommendations. When helping with proposals, focus on creating personalized, professional messages that demonstrate value and build client confidence.
+"""

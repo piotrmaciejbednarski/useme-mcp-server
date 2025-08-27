@@ -8,7 +8,7 @@ def load_categories(lang: Optional[str] = None) -> List[Category]:
     """Load categories from static JSON file, optionally filtered by language"""
     try:
         categories_file = (
-            Path(__file__).parent.parent.parent / "data" / "categories.json"
+            Path(__file__).parent.parent.parent / "config" / "categories.json"
         )
         with open(categories_file, "r", encoding="utf-8") as f:
             categories_data = json.load(f)
