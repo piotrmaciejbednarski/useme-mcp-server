@@ -132,3 +132,63 @@ class BillingResult(BaseModel):
     contractor: BillingContractor
     employer: BillingEmployer
     calculation: BillingCalculation
+
+
+class UserProfileStats(BaseModel):
+    country: str
+    location: Optional[str] = None
+    useme_since: str
+
+
+class UserDeals(BaseModel):
+    total: int
+    successful: int
+    disputed: int
+    failed: int
+
+
+class UserOpinions(BaseModel):
+    total: int
+    positive: int
+    neutral: int
+    negative: int
+
+
+class UserCategory(BaseModel):
+    name: str
+
+
+class UserPortfolioItem(BaseModel):
+    title: str
+    url: str
+    description: str
+
+
+class UserOpinion(BaseModel):
+    author_name: str
+    date: str
+    opinion_type: str  # positive, neutral, negative
+    content: str
+    freelancer_reply: Optional[str] = None
+    freelancer_reply_date: Optional[str] = None
+
+
+class UserCompletedJob(BaseModel):
+    title: str
+    url: str
+    description: str
+    category_name: str
+
+
+class UserProfile(BaseModel):
+    profile_url: str
+    username: str
+    stats: UserProfileStats
+    deals: UserDeals
+    opinions: UserOpinions
+    about_me: Optional[str] = None
+    categories: List[UserCategory] = []
+    skills: List[str] = []
+    portfolio: List[UserPortfolioItem] = []
+    user_opinions: List[UserOpinion] = []
+    completed_jobs: List[UserCompletedJob] = []

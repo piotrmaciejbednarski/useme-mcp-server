@@ -29,6 +29,7 @@ from useme_mcp.services.category_jobs import (
     fetch_category_jobs_multiple_pages,
 )
 from useme_mcp.services.billing_calculator import calculate_billing
+from useme_mcp.services.user_profile import fetch_user_profile
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -336,6 +337,30 @@ def calculate_useme_billing(
         employer_is_vat_payer=employer_is_vat_payer,
     )
     return billing.model_dump() if billing else None
+
+
+@mcp.tool()
+def get_user_profile(profile_url: str) -> Optional[Dict[str, Any]]:
+    """
+    Get comprehensive user profile information from Useme
+
+    Analyzes a freelancer's public profile to understand their background,
+    experience, and reputation. Perfect for competitive analysis.
+
+    Args:
+        profile_url: Full URL to the user's Useme profile
+                    (e.g., https://useme.com/pl/roles/contractor/username,123456/)
+
+    Returns:
+        Detailed profile information including:
+        - Basic info: username, location, registration date
+        - Performance stats: completed deals, success rate, opinions
+        - Professional info: categories, skills, portfolio projects
+        - Social proof: client reviews and freelancer responses
+        - Work history: completed projects with descriptions
+    """
+    profile = fetch_user_profile(profile_url)
+    return profile.model_dump() if profile else None
 
 
 # Category Management Tools
