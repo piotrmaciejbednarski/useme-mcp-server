@@ -14,12 +14,14 @@ The server provides pure data fetching tools - all analysis and recommendations 
 ## Quick Start
 
 ### Prerequisites
+
 - Python 3.8+
 - [UV](https://docs.astral.sh/uv/) (Python package manager)
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/piotrmaciejbednarski/useme-mcp-server.git
 ```
