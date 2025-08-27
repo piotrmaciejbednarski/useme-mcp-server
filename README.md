@@ -35,6 +35,8 @@ Add the MCP server to your configuration:
 
 Replace `{absolute_path}` with the absolute path to your project directory.
 
+Remember to install UV in the operating system (https://docs.astral.sh/uv/getting-started/installation/), without it, you won't be able to use `uvx`.
+
 ## Available Tools
 
 ### Job Browsing
