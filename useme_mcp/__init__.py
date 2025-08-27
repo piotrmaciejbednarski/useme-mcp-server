@@ -1,0 +1,1 @@
+# Useme MCP Server - Job Search Assistant for Freelancers

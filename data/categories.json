@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Web Development",
+    "slug": "web-development",
+    "category_id": 34,
+    "lang": "en"
+  },
+  {
+    "name": "Multimedia",
+    "slug": "multimedia",
+    "category_id": 36,
+    "lang": "en"
+  },
+  {
+    "name": "Coding And It",
+    "slug": "coding-and-it",
+    "category_id": 35,
+    "lang": "en"
+  },
+  {
+    "name": "Marketing",
+    "slug": "marketing",
+    "category_id": 37,
+    "lang": "en"
+  },
+  {
+    "name": "Design",
+    "slug": "design",
+    "category_id": 38,
+    "lang": "en"
+  },
+  {
+    "name": "Translation",
+    "slug": "translation",
+    "category_id": 39,
+    "lang": "en"
+  },
+  {
+    "name": "Admin Support",
+    "slug": "admin-support",
+    "category_id": 40,
+    "lang": "en"
+  },
+  {
+    "name": "Other Services",
+    "slug": "other-services",
+    "category_id": 13,
+    "lang": "en"
+  },
+  {
+    "name": "Jobs For Students",
+    "slug": "jobs-for-students",
+    "category_id": 5,
+    "lang": "en"
+  },
+  {
+    "name": "Hosting Advertising",
+    "slug": "hosting-advertising",
+    "category_id": 12,
+    "lang": "en"
+  },
+  {
+    "name": "Serwisy Internetowe",
+    "slug": "serwisy-internetowe",
+    "category_id": 34,
+    "lang": "pl"
+  },
+  {
+    "name": "Multimedia",
+    "slug": "multimedia",
+    "category_id": 36,
+    "lang": "pl"
+  },
+  {
+    "name": "Programowanie I It",
+    "slug": "programowanie-i-it",
+    "category_id": 35,
+    "lang": "pl"
+  },
+  {
+    "name": "Marketing",
+    "slug": "marketing",
+    "category_id": 37,
+    "lang": "pl"
+  },
+  {
+    "name": "Design",
+    "slug": "design",
+    "category_id": 38,
+    "lang": "pl"
+  },
+  {
+    "name": "Tlumaczenia",
+    "slug": "tlumaczenia",
+    "category_id": 39,
+    "lang": "pl"
+  },
+  {
+    "name": "Prace Biurowe",
+    "slug": "prace-biurowe",
+    "category_id": 40,
+    "lang": "pl"
+  },
+  {
+    "name": "Inne Prace",
+    "slug": "inne-prace",
+    "category_id": 13,
+    "lang": "pl"
+  },
+  {
+    "name": "Zlecenia Dla Studentow",
+    "slug": "zlecenia-dla-studentow",
+    "category_id": 5,
+    "lang": "pl"
+  },
+  {
+    "name": "Hosting Reklama",
+    "slug": "hosting-reklama",
+    "category_id": 12,
+    "lang": "pl"
+  }
+]
