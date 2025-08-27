@@ -13,7 +13,7 @@ The server provides pure data fetching tools - all analysis and recommendations 
 
 ## Installation
 
-Add the MCP server to your configuration:
+Clone this repo using `git` then add the MCP server to your configuration:
 
 ```json
 {
@@ -33,7 +33,7 @@ Add the MCP server to your configuration:
 }
 ```
 
-Replace `{absolute_path}` with the absolute path to your project directory.
+Replace `{absolute_path}` with the absolute path to your repository.
 
 Remember to install UV in the operating system (https://docs.astral.sh/uv/getting-started/installation/), without it, you won't be able to use `uvx`.
 
