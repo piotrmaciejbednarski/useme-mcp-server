@@ -49,6 +49,7 @@ git clone https://github.com/piotrmaciejbednarski/useme-mcp-server.git
 - `browse_jobs(page, language = "en", num_pages)` - Browse job offers from main pages (default ordering)
 - `browse_category_jobs(category_id, page, language = "en", num_pages)` - Browse jobs from specific categories (default ordering)
 - `get_job_details(job_url)` - Get detailed information about a specific job
+- `get_job_competition(job_url)` - Analyze competition for a specific job offer
 
 ### Job Filtering & Sorting
 
@@ -104,4 +105,20 @@ git clone https://github.com/piotrmaciejbednarski/useme-mcp-server.git
 ...
 
 **Assistant:** Based on the offer details, I recommend applying for Offer 1 because it has competitive budget and reasonable requirements.
+```
+
+### Competition analysis
+
+```md
+**User:** Analyze the competition for this job offer to help me decide if I should apply.
+
+**Assistant:** Ran `get_job_competition(job_url='https://useme.com/pl/job/123456/')`
+
+**Assistant:** Competition analysis shows:
+- **12 total competitors** have submitted offers
+- **Experience levels:** 3 experienced (50+ contracts), 6 intermediate (5-20 contracts), 3 beginners (0-2 contracts)
+- **Common skills:** Most competitors have Python, Django, but few have machine learning experience
+- **Submission timing:** Most offers submitted today
+
+**Recommendation:** Good opportunity to apply - you have unique ML skills that most competitors lack, and there's reasonable competition level.
 ```
