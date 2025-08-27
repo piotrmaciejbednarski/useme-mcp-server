@@ -1,5 +1,7 @@
 # Useme MCP Server
 
+![Useme MCP Server](/image.png)
+
 MCP (Model Context Protocol) server providing data fetching tools for the [Useme.com](https://useme.com) freelance platform. This server allows AI assistants to help freelancers find and analyze job opportunities.
 
 ## Features
