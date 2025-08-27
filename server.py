@@ -17,6 +17,7 @@ from useme_mcp.services.job_scraper import (
     fetch_jobs_page,
     fetch_multiple_pages,
     fetch_job_details,
+    fetch_job_competition,
 )
 from useme_mcp.services.category_service import (
     load_categories,
@@ -52,7 +53,8 @@ mcp = FastMCP(
 
 
 # Job Browsing Tools
-@mcp.tool(description="""
+@mcp.tool(
+    description="""
 Browse Available Job Offers from Useme Platform
 
 Args:
@@ -62,7 +64,8 @@ Args:
 
 Returns:
 List of job offers with details like title, budget, client, and competition level.       
-""")
+"""
+)
 def browse_jobs(
     page: int = 1,
     language: str = "en",
@@ -130,7 +133,8 @@ def browse_category_jobs(
 
 
 # Job Filtering Tools (with order_by support)
-@mcp.tool(description="""
+@mcp.tool(
+    description="""
 Filter and Sort Job Offers from Useme Platform
 
 Args:
@@ -148,7 +152,8 @@ Args:
 
 Returns:
 List of filtered and sorted job offers with details like title, budget, client, and competition level.       
-""")
+"""
+)
 def filter_jobs(
     page: int = 1,
     language: str = "en",
@@ -254,6 +259,27 @@ def get_job_details(job_url: str) -> Optional[Dict[str, Any]]:
     """
     job_detail = fetch_job_details(job_url)
     return job_detail.model_dump() if job_detail else None
+
+
+@mcp.tool()
+def get_job_competition(job_url: str) -> Optional[Dict[str, Any]]:
+    """
+    Get competition details for a specific job offer
+
+    Analyzes competitors who have submitted offers for the job, including:
+    - Username and profile information
+    - Number of completed contracts (experience level)
+    - Skills listed on their profiles
+    - When they submitted their offers
+
+    Args:
+        job_url: Full URL of the job offer
+
+    Returns:
+        Competition analysis including list of competitors with their profiles and experience
+    """
+    competition = fetch_job_competition(job_url)
+    return competition.model_dump() if competition else None
 
 
 # Category Management Tools
