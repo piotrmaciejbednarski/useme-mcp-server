@@ -174,3 +174,7 @@ This assumes standard settings (license transfer, individual freelancer, busines
 
 **Competitive positioning:** Strong technical expertise but occasional client communication issues based on reviews.
 ```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
