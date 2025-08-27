@@ -50,6 +50,7 @@ git clone https://github.com/piotrmaciejbednarski/useme-mcp-server.git
 - `browse_category_jobs(category_id, page, language = "en", num_pages)` - Browse jobs from specific categories (default ordering)
 - `get_job_details(job_url)` - Get detailed information about a specific job
 - `get_job_competition(job_url)` - Analyze competition for a specific job offer
+- `calculate_useme_billing(payout_amount: float, currency: str = "PLN", copyright_transfer: str = "license", contractor_country: str = "PL", contractor_is_business: bool = False, contractor_is_vat_payer: bool = False, employer_country: str = "PL", employer_is_business: bool = True, employer_is_vat_payer: bool = True)` - Calculate billing costs and fees
 
 ### Job Filtering & Sorting
 
@@ -121,4 +122,26 @@ git clone https://github.com/piotrmaciejbednarski/useme-mcp-server.git
 - **Submission timing:** Most offers submitted today
 
 **Recommendation:** Good opportunity to apply - you have unique ML skills that most competitors lack, and there's reasonable competition level.
+```
+
+### Billing calculator
+
+```md
+**User:** I want to earn 250 PLN from a project. How much should I charge the client?
+
+**Assistant:** Ran `calculate_useme_billing(payout_amount=250, currency='PLN')`
+
+**Assistant:** For you to receive 250 PLN, the client needs to pay **362.85 PLN** total.
+
+**Cost breakdown:**
+- **Base amount:** 295.00 PLN
+- **VAT (23%):** 67.85 PLN  
+- **Total client pays:** 362.85 PLN
+
+**Your deductions:**
+- **Useme commission:** 29.00 PLN
+- **PIT tax:** 16.00 PLN
+- **Net payout to you:** 250.00 PLN
+
+This assumes standard settings (license transfer, individual freelancer, business client).
 ```
