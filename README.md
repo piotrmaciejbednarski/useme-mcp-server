@@ -70,7 +70,7 @@ Replace `{absolute_path}` with the absolute path to your project directory.
 
 ...
 
-**Assistant:** Based on the job details, I recommend applying for Offer 1 because it has a lower competition level and a reasonable budget for entry-level developers.
+**Assistant:** Based on the offer details, I recommend applying for Offer 1 because it has a lower competition level and a reasonable budget for entry-level developers.
 
 **User:** Thanks. Write me proposal message for this offer.
 
