@@ -2,7 +2,7 @@
 name = "useme-mcp-server"
 version = "0.1.0"
 license = "MIT"
-description = "MCP for providing data fetching tools for Useme.com platform"
+description = "MCP server for data fetching from Useme.com platform"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
