@@ -46,9 +46,23 @@ git clone https://github.com/piotrmaciejbednarski/useme-mcp-server.git
 
 ### Job Browsing
 
-- `browse_jobs(page, language = "en", num_pages)` - Browse job offers from main pages
-- `browse_category_jobs(category_id, page, language = "en", num_pages)` - Browse jobs from specific categories
+- `browse_jobs(page, language = "en", num_pages)` - Browse job offers from main pages (default ordering)
+- `browse_category_jobs(category_id, page, language = "en", num_pages)` - Browse jobs from specific categories (default ordering)
 - `get_job_details(job_url)` - Get detailed information about a specific job
+
+### Job Filtering & Sorting
+
+- `filter_jobs(page, language = "en", num_pages, order_by)` - Filter and sort job offers with custom ordering
+- `filter_category_jobs(category_id, page, language = "en", num_pages, order_by)` - Filter and sort jobs from specific categories
+
+**Sorting options for filter functions:**
+
+- `-published_on`: Sort by newest jobs first
+- `expires`: Sort by jobs expiring soonest  
+- `offer_count`: Sort by jobs with fewest offers
+- `-offer_count`: Sort by jobs with most offers
+- `payment_normalized`: Sort by lowest budget first
+- `-payment_normalized`: Sort by highest budget first
 
 ### Category Management
 
@@ -58,18 +72,30 @@ git clone https://github.com/piotrmaciejbednarski/useme-mcp-server.git
 
 ## Example usage
 
+### Basic browsing
+
 ```md
-**User:** Fetch last 2 pages of job offers from Useme in Polish language for Programming category. Then find a job offer for Python developer.
+**User:** Show me recent job offers from Programming category. Only polish offers.
 
 **Assistant:** Ran `search_categories(search_term='programowanie', language='pl')`
 
 **Assistant:** Ran `browse_category_jobs(category_id=35, page=1, language='pl', num_pages=2)`
+```
 
-**Assistant:** Found job offers for Python developer:
+### Filtering and sorting
+
+```md
+**User:** Find highest paying Python jobs from last week, sorted by budget. Only polish offers.
+
+**Assistant:** Ran `search_categories(search_term='programowanie', language='pl')`
+
+**Assistant:** Ran `filter_category_jobs(category_id=35, page=1, language='pl', num_pages=3, order_by='-payment_normalized')`
+
+**Assistant:** Found job offers for Python developer sorted by highest budget first:
 
 ...
 
-**User:** Check details for this offers, and tell me which one is the best fit for me. I'm just starting out as a Python developer.
+**User:** Check details for the top offers.
 
 **Assistant:** Ran `get_job_details(job_url_1)`
 
@@ -77,11 +103,5 @@ git clone https://github.com/piotrmaciejbednarski/useme-mcp-server.git
 
 ...
 
-**Assistant:** Based on the offer details, I recommend applying for Offer 1 because it has a lower competition level and a reasonable budget for entry-level developers.
-
-**User:** Thanks. Write me proposal message for this offer.
-
-**Assistant:** Sure! Here's a proposal message you can use:
-
-...
+**Assistant:** Based on the offer details, I recommend applying for Offer 1 because it has competitive budget and reasonable requirements.
 ```

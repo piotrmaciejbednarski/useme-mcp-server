@@ -59,6 +59,84 @@ Args:
 - **page**: Starting page number (default: 1)
 - **language**: Language version - `en` for English, `pl` for Polish (default: `en`)
 - **num_pages**: Number of pages to fetch (default: 1)
+
+Returns:
+List of job offers with details like title, budget, client, and competition level.       
+""")
+def browse_jobs(
+    page: int = 1,
+    language: str = "en",
+    num_pages: int = 1,
+) -> List[Dict[str, Any]]:
+    """
+    Browse available job offers from Useme platform
+
+    Args:
+        page: Starting page number (default: 1)
+        language: Language version - 'en' for English, 'pl' for Polish (default: 'en')
+        num_pages: Number of pages to fetch (default: 1)
+
+    Returns:
+        List of job offers with details like title, budget, client, competition level
+    """
+    if num_pages == 1:
+        jobs = fetch_jobs_page(page, language, None)
+    else:
+        jobs = fetch_multiple_pages(page, num_pages, language, None)
+
+    return [job.model_dump() for job in jobs]
+
+
+@mcp.tool(
+    description="""
+Browse Job Offers from a Specific Category
+
+Args:
+- **category_id**: Category ID (e.g., 35 for Programming/IT)
+- **page**: Starting page number (default: 1)
+- **language**: Language version - `en` or `pl` (default: `en`)
+- **num_pages**: Number of pages to fetch (default: 1)
+
+Returns:
+List of job offers from the specified category.
+"""
+)
+def browse_category_jobs(
+    category_id: int,
+    page: int = 1,
+    language: str = "en",
+    num_pages: int = 1,
+) -> List[Dict[str, Any]]:
+    """
+    Browse job offers from a specific category
+
+    Args:
+        category_id: Category ID (e.g., 35 for Programming/IT)
+        page: Starting page number (default: 1)
+        language: Language version - 'en' or 'pl' (default: 'en')
+        num_pages: Number of pages to fetch (default: 1)
+
+    Returns:
+        List of job offers from the specified category
+    """
+    if num_pages == 1:
+        jobs = fetch_category_jobs_page(category_id, page, language, None)
+    else:
+        jobs = fetch_category_jobs_multiple_pages(
+            category_id, page, num_pages, language, None
+        )
+
+    return [job.model_dump() for job in jobs]
+
+
+# Job Filtering Tools (with order_by support)
+@mcp.tool(description="""
+Filter and Sort Job Offers from Useme Platform
+
+Args:
+- **page**: Starting page number (default: 1)
+- **language**: Language version - `en` for English, `pl` for Polish (default: `en`)
+- **num_pages**: Number of pages to fetch (default: 1)
 - **order_by**: Sort order for jobs. Available options:
   - `-published_on`: Sort by newest jobs first
   - `expires`: Sort by jobs expiring soonest
@@ -69,16 +147,16 @@ Args:
   - **Empty**: Default ordering (no sorting parameter)
 
 Returns:
-List of job offers with details like title, budget, client, and competition level.       
+List of filtered and sorted job offers with details like title, budget, client, and competition level.       
 """)
-def browse_jobs(
+def filter_jobs(
     page: int = 1,
     language: str = "en",
     num_pages: int = 1,
     order_by: Optional[str] = None,
 ) -> List[Dict[str, Any]]:
     """
-    Browse available job offers from Useme platform
+    Filter and sort available job offers from Useme platform
 
     Args:
         page: Starting page number (default: 1)
@@ -94,7 +172,7 @@ def browse_jobs(
         - Empty: Default ordering (no sorting parameter)
 
     Returns:
-        List of job offers with details like title, budget, client, competition level
+        List of filtered and sorted job offers with details like title, budget, client, competition level
     """
     if num_pages == 1:
         jobs = fetch_jobs_page(page, language, order_by)
@@ -106,7 +184,7 @@ def browse_jobs(
 
 @mcp.tool(
     description="""
-Browse Job Offers from a Specific Category
+Filter and Sort Job Offers from a Specific Category
 
 Args:
 - **category_id**: Category ID (e.g., 35 for Programming/IT)
@@ -123,10 +201,10 @@ Args:
   - **Empty**: Default ordering (no sorting parameter)
 
 Returns:
-List of job offers from the specified category.
+List of filtered and sorted job offers from the specified category.
 """
 )
-def browse_category_jobs(
+def filter_category_jobs(
     category_id: int,
     page: int = 1,
     language: str = "en",
@@ -134,7 +212,7 @@ def browse_category_jobs(
     order_by: Optional[str] = None,
 ) -> List[Dict[str, Any]]:
     """
-    Browse job offers from a specific category
+    Filter and sort job offers from a specific category
 
     Args:
         category_id: Category ID (e.g., 35 for Programming/IT)
@@ -151,7 +229,7 @@ def browse_category_jobs(
         - Empty: Default ordering (no sorting parameter)
 
     Returns:
-        List of job offers from the specified category
+        List of filtered and sorted job offers from the specified category
     """
     if num_pages == 1:
         jobs = fetch_category_jobs_page(category_id, page, language, order_by)
