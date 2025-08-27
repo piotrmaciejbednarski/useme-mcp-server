@@ -11,9 +11,20 @@ The server provides pure data fetching tools - all analysis and recommendations 
 - **Category management**: List and search available job categories
 - **Multi-language support**: Support for Polish and English versions of Useme
 
-## Installation
+## Quick Start
 
-Clone this repo using `git` then add the MCP server to your configuration:
+### Prerequisites
+- Python 3.8+
+- [UV](https://docs.astral.sh/uv/) (Python package manager)
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/piotrmaciejbednarski/useme-mcp-server.git
+```
+
+2. Add to your MCP client configuration (e.g. Claude Desktop):
 
 ```json
 {
@@ -22,20 +33,14 @@ Clone this repo using `git` then add the MCP server to your configuration:
         "type": "stdio",
         "command": "uvx",
         "args": [
-            "--with",
-            "cloudscraper,pydantic,beautifulsoup4",
-            "fastmcp",
-            "run",
-            "{absolute_path}/useme-mcp-server/server.py"
+            "--with", "cloudscraper,pydantic,beautifulsoup4",
+            "fastmcp", "run",
+            "/absolute/path/to/useme-mcp-server/server.py"
         ]
     }
   }
 }
 ```
-
-Replace `{absolute_path}` with the absolute path to your repository.
-
-Remember to install UV in the operating system (https://docs.astral.sh/uv/getting-started/installation/), without it, you won't be able to use `uvx`.
 
 ## Available Tools
 
