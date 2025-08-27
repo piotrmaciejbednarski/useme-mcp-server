@@ -117,9 +117,7 @@ def browse_category_jobs(
     if num_pages == 1:
         jobs = fetch_category_jobs_page(category_id, page, language, None)
     else:
-        jobs = fetch_category_jobs_multiple_pages(
-            category_id, page, num_pages, language, None
-        )
+        jobs = fetch_category_jobs_multiple_pages(category_id, page, num_pages, language, None)
 
     return [job.model_dump() for job in jobs]
 
@@ -143,7 +141,8 @@ Args:
   - **Empty**: Default ordering (no sorting parameter)
 
 Returns:
-List of filtered and sorted job offers with details like title, budget, client, and competition level.       
+List of filtered and sorted job offers with details like title, budget, client, and
+competition level.
 """
 )
 def filter_jobs(
@@ -169,7 +168,8 @@ def filter_jobs(
         - Empty: Default ordering (no sorting parameter)
 
     Returns:
-        List of filtered and sorted job offers with details like title, budget, client, competition level
+        List of filtered and sorted job offers with details like title, budget, client,
+        competition level
     """
     if num_pages == 1:
         jobs = fetch_jobs_page(page, language, order_by)
@@ -231,9 +231,7 @@ def filter_category_jobs(
     if num_pages == 1:
         jobs = fetch_category_jobs_page(category_id, page, language, order_by)
     else:
-        jobs = fetch_category_jobs_multiple_pages(
-            category_id, page, num_pages, language, order_by
-        )
+        jobs = fetch_category_jobs_multiple_pages(category_id, page, num_pages, language, order_by)
 
     return [job.model_dump() for job in jobs]
 
@@ -370,9 +368,7 @@ def list_categories(language: Optional[str] = None) -> List[Dict[str, Any]]:
 
 
 @mcp.tool()
-def search_categories(
-    search_term: str, language: Optional[str] = None
-) -> List[Dict[str, Any]]:
+def search_categories(search_term: str, language: Optional[str] = None) -> List[Dict[str, Any]]:
     """
     Search for categories by name
 
@@ -388,9 +384,7 @@ def search_categories(
 
 
 @mcp.tool()
-def get_category_info(
-    category_id: int, language: str = "en"
-) -> Optional[Dict[str, Any]]:
+def get_category_info(category_id: int, language: str = "en") -> Optional[Dict[str, Any]]:
     """
     Get information about a specific category
 

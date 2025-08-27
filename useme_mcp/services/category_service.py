@@ -7,9 +7,7 @@ from ..models import Category
 def load_categories(lang: Optional[str] = None) -> List[Category]:
     """Load categories from static JSON file, optionally filtered by language"""
     try:
-        categories_file = (
-            Path(__file__).parent.parent.parent / "config" / "categories.json"
-        )
+        categories_file = Path(__file__).parent.parent.parent / "config" / "categories.json"
         with open(categories_file, "r", encoding="utf-8") as f:
             categories_data = json.load(f)
 
@@ -43,9 +41,7 @@ def get_categories_by_language(lang: str) -> List[Category]:
     return load_categories(lang)
 
 
-def find_categories_by_name(
-    search_term: str, lang: Optional[str] = None
-) -> List[Category]:
+def find_categories_by_name(search_term: str, lang: Optional[str] = None) -> List[Category]:
     """Find categories by name (partial match)"""
     categories = load_categories(lang)
     search_term = search_term.lower()

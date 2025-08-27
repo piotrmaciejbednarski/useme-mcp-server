@@ -14,9 +14,7 @@ from ..models import (
 )
 
 
-def parse_user_profile_from_html(
-    html_content: str, profile_url: str
-) -> Optional[UserProfile]:
+def parse_user_profile_from_html(html_content: str, profile_url: str) -> Optional[UserProfile]:
     """Parse user profile data from public_user_profile HTML content"""
     soup = bs4.BeautifulSoup(html_content, "html.parser")
 
@@ -105,9 +103,7 @@ def parse_user_profile_from_html(
 
         if opinions_div:
             # Extract total opinions from title
-            opinions_title = opinions_div.find(
-                "h2", class_="profile-main__title-secondary"
-            )
+            opinions_title = opinions_div.find("h2", class_="profile-main__title-secondary")
             if opinions_title:
                 opinions_match = re.search(r"(\d+)", opinions_title.text)
                 if opinions_match:
@@ -173,9 +169,7 @@ def parse_user_profile_from_html(
         portfolio = []
         portfolio_div = soup.find("div", class_="profile-main__portfolio")
         if portfolio_div:
-            portfolio_items = portfolio_div.find_all(
-                "div", class_="profile-main__portfolio__item"
-            )
+            portfolio_items = portfolio_div.find_all("div", class_="profile-main__portfolio__item")
             for item in portfolio_items:
                 title = ""
                 url = ""
@@ -221,11 +215,7 @@ def parse_user_profile_from_html(
 
                         date_div = portrait.find("div", class_="portrait__date")
                         if date_div:
-                            date = (
-                                date_div.text.strip()
-                                .replace("on ", "")
-                                .replace("w dniu ", "")
-                            )
+                            date = date_div.text.strip().replace("on ", "").replace("w dniu ", "")
 
                     # Extract opinion type
                     opinion_type = "neutral"
@@ -245,17 +235,13 @@ def parse_user_profile_from_html(
                     freelancer_reply_date = None
                     answer_div = row.find("div", class_="opinion-content-answer")
                     if answer_div:
-                        reply_content = answer_div.find(
-                            "div", class_="opinion-content-text"
-                        )
+                        reply_content = answer_div.find("div", class_="opinion-content-text")
                         if reply_content:
                             freelancer_reply = reply_content.text.strip()
 
                         reply_portrait = answer_div.find("div", class_="portrait")
                         if reply_portrait:
-                            reply_date_div = reply_portrait.find(
-                                "div", class_="portrait__date"
-                            )
+                            reply_date_div = reply_portrait.find("div", class_="portrait__date")
                             if reply_date_div:
                                 freelancer_reply_date = (
                                     reply_date_div.text.strip()
@@ -281,9 +267,7 @@ def parse_user_profile_from_html(
         completed_jobs = []
         completed_section = soup.find("ul", class_="recent-jobs__list")
         if completed_section:
-            job_items = completed_section.find_all(
-                "li", class_="recent-jobs__list-item"
-            )
+            job_items = completed_section.find_all("li", class_="recent-jobs__list-item")
             for item in job_items:
                 try:
                     title_link = item.find("a", class_="recent-job__title")

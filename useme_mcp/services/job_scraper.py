@@ -20,9 +20,7 @@ def parse_jobs_from_html(html_content: str) -> List[JobOffer]:
             client = client_elem.get("aria-label", "").strip() if client_elem else ""
 
             # Extract deals count (optional) - support both English and Polish
-            deals_elem = article.find(
-                "span", string=re.compile(r"\d+\s+(deal|umów|umowa)")
-            )
+            deals_elem = article.find("span", string=re.compile(r"\d+\s+(deal|umów|umowa)"))
             deals_count = None
             if deals_elem:
                 deals_match = re.search(r"(\d+)", deals_elem.text)
@@ -30,9 +28,9 @@ def parse_jobs_from_html(html_content: str) -> List[JobOffer]:
                     deals_count = int(deals_match.group(1))
 
             # Extract offers count
-            offers_span = article.find(
-                "div", class_="job__header-details--offers"
-            ).find("span", string=re.compile(r"\d+"))
+            offers_span = article.find("div", class_="job__header-details--offers").find(
+                "span", string=re.compile(r"\d+")
+            )
             offers_count = int(offers_span.text.strip()) if offers_span else 0
 
             # Extract days left (support both English and Polish)
@@ -182,9 +180,9 @@ def parse_job_detail_from_html(html_content: str, job_url: str) -> Optional[JobD
             label_elem = item.find("div", class_="jobs-summary__item-label")
 
             # Check both jobs-summary__item-value and jobs-summary__item-text
-            value_elem = item.find(
-                "div", class_="jobs-summary__item-value"
-            ) or item.find("div", class_="jobs-summary__item-text")
+            value_elem = item.find("div", class_="jobs-summary__item-value") or item.find(
+                "div", class_="jobs-summary__item-text"
+            )
 
             if not label_elem or not value_elem:
                 continue
@@ -210,11 +208,7 @@ def parse_job_detail_from_html(html_content: str, job_url: str) -> Optional[JobD
                 published_ago = value
             elif label in ["Kategoria", "Category"]:
                 category_link = value_elem.find("a")
-                category = (
-                    category_link.text.strip()
-                    if category_link
-                    else value_elem.text.strip()
-                )
+                category = category_link.text.strip() if category_link else value_elem.text.strip()
             elif label in ["Prawa autorskie", "Copyright"]:
                 copyright = value
             elif label in ["Budżet", "Budget"]:
@@ -231,9 +225,7 @@ def parse_job_detail_from_html(html_content: str, job_url: str) -> Optional[JobD
                 custom_fields[label] = value
 
         # Extract offers count from offers section (both Polish and English)
-        offers_header = soup.find(
-            "h3", string=re.compile(r"(Wysłane oferty|Submitted offers)")
-        )
+        offers_header = soup.find("h3", string=re.compile(r"(Wysłane oferty|Submitted offers)"))
         if offers_header:
             offers_match = re.search(r"\((\d+)\)", offers_header.text)
             if offers_match:
@@ -303,9 +295,7 @@ def extract_job_id_from_url(job_url: str) -> Optional[str]:
     return None
 
 
-def fetch_competition_page(
-    job_id: str, page: int = 1, lang: str = "pl"
-) -> Optional[dict]:
+def fetch_competition_page(job_id: str, page: int = 1, lang: str = "pl") -> Optional[dict]:
     """Fetch single page of competition data from API"""
     scraper = cloudscraper.create_scraper()
 
@@ -327,9 +317,7 @@ def fetch_competition_page(
         return None
 
 
-def parse_competition_from_api_data(
-    api_data: dict, job_url: str, job_id: str
-) -> JobCompetition:
+def parse_competition_from_api_data(api_data: dict, job_url: str, job_id: str) -> JobCompetition:
     """Parse competition data from API response"""
     competitors = []
 
@@ -414,18 +402,14 @@ def fetch_job_competition(job_url: str) -> Optional[JobCompetition]:
         all_competitors = []
 
         # Parse first page
-        first_page_competition = parse_competition_from_api_data(
-            first_page_data, job_url, job_id
-        )
+        first_page_competition = parse_competition_from_api_data(first_page_data, job_url, job_id)
         all_competitors.extend(first_page_competition.competitors)
 
         # Fetch remaining pages if any
         for page in range(2, total_pages + 1):
             page_data = fetch_competition_page(job_id, page, lang)
             if page_data:
-                page_competition = parse_competition_from_api_data(
-                    page_data, job_url, job_id
-                )
+                page_competition = parse_competition_from_api_data(page_data, job_url, job_id)
                 all_competitors.extend(page_competition.competitors)
             else:
                 print(f"Failed to fetch page {page}, continuing with partial data")
