@@ -28,6 +28,7 @@ from useme_mcp.services.category_jobs import (
     fetch_category_jobs_page,
     fetch_category_jobs_multiple_pages,
 )
+from useme_mcp.services.billing_calculator import calculate_billing
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -280,6 +281,61 @@ def get_job_competition(job_url: str) -> Optional[Dict[str, Any]]:
     """
     competition = fetch_job_competition(job_url)
     return competition.model_dump() if competition else None
+
+
+@mcp.tool()
+def calculate_useme_billing(
+    payout_amount: float,
+    currency: str = "PLN",
+    copyright_transfer: str = "license",
+    contractor_country: str = "PL",
+    contractor_is_business: bool = False,
+    contractor_is_vat_payer: bool = False,
+    employer_country: str = "PL",
+    employer_is_business: bool = True,
+    employer_is_vat_payer: bool = True,
+) -> Optional[Dict[str, Any]]:
+    """
+    Calculate billing costs and fees for Useme freelance work
+
+    Calculates what the client will pay (including VAT, Useme commission, PIT tax)
+    based on the desired payout amount to the freelancer.
+
+    Args:
+        payout_amount: Amount the freelancer wants to receive (after all deductions)
+        currency: Currency code - PLN, EUR, GBP, or USD (default: PLN)
+        copyright_transfer: Transfer type - "license" (default) or "full"
+        contractor_country: Freelancer's country code (default: PL)
+        contractor_is_business: Whether freelancer is registered business (default: False)
+        contractor_is_vat_payer: Whether freelancer pays VAT (default: False)
+        employer_country: Client's country code (default: PL)
+        employer_is_business: Whether client is a business (default: True)
+        employer_is_vat_payer: Whether client pays VAT (default: True)
+
+    Returns:
+        Detailed breakdown of costs including:
+        - Final invoice amount client pays
+        - VAT amount
+        - Useme commission
+        - PIT tax
+        - Net amount breakdown
+
+    Example:
+        250 PLN payout → 362.85 PLN total client payment
+        (295 PLN base + 67.85 PLN VAT, minus 29 PLN commission + 16 PLN PIT)
+    """
+    billing = calculate_billing(
+        amount=payout_amount,
+        currency=currency,
+        copyright_transfer=copyright_transfer,
+        contractor_country=contractor_country,
+        contractor_is_business=contractor_is_business,
+        contractor_is_vat_payer=contractor_is_vat_payer,
+        employer_country=employer_country,
+        employer_is_business=employer_is_business,
+        employer_is_vat_payer=employer_is_vat_payer,
+    )
+    return billing.model_dump() if billing else None
 
 
 # Category Management Tools

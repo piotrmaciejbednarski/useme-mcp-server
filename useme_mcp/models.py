@@ -94,3 +94,41 @@ class JobCompetition(BaseModel):
     total_offers: int
     total_pages: int
     competitors: List[JobCompetitor] = []
+
+
+class BillingContractor(BaseModel):
+    email: Optional[str] = None
+    country: str = "PL"
+    residence: Optional[str] = None
+    is_business: bool = False
+    is_vat_payer: bool = False
+    user_class: str = "default"
+
+
+class BillingEmployer(BaseModel):
+    email: Optional[str] = None
+    country: str = "PL"
+    is_business: bool = True
+    is_vat_payer: bool = True
+    user_class: str = "default"
+
+
+class BillingComponent(BaseModel):
+    label: str
+    value: float
+
+
+class BillingCalculation(BaseModel):
+    currency: str
+    payin: List[BillingComponent] = []
+    payout: List[BillingComponent] = []
+    price_components: List[BillingComponent] = []
+
+
+class BillingResult(BaseModel):
+    amount: float
+    currency: str
+    copyright_transfer: str
+    contractor: BillingContractor
+    employer: BillingEmployer
+    calculation: BillingCalculation
